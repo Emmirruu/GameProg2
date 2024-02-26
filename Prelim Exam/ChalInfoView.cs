@@ -17,6 +17,11 @@ public class ChalInfoView : MonoBehaviour
     public TextMeshProUGUI maxlvTMP;
     public TextMeshProUGUI descriptionTMP;
     public Image chalImage;
+    public GameObject passiveBtn;
+    public GameObject skill1Btn;
+    public GameObject skill2Btn;
+    public GameObject ultimateBtn;
+    public SkillInfoView skillInfoView;
 
 
     public void OnEnable()
@@ -32,6 +37,30 @@ public class ChalInfoView : MonoBehaviour
         maxlvTMP.text = challenger.maxlv.ToString();
         descriptionTMP.text = challenger.des;
         chalImage.sprite = challenger.infoImage;
+
+        SkillBtn pSkillBtn = passiveBtn.GetComponent<SkillBtn>(); //passive
+        pSkillBtn.SetPassive(challenger);
+
+        Button passiveButton = passiveBtn.GetComponent<Button>();
+        passiveButton.onClick.AddListener(() => skillInfoView.DisplayPassiveSkill(challenger));
+
+        SkillBtn skillBtn1 = skill1Btn.GetComponent<SkillBtn>(); //1st Skill
+        skillBtn1.SetFirstSkill(challenger);
+
+        Button firstSkill = skill1Btn.GetComponent<Button>();
+        firstSkill.onClick.AddListener(() => skillInfoView.DisplayFirstSkill(challenger));
+
+        SkillBtn skillBtn2 = skill2Btn.GetComponent<SkillBtn>(); //2nd Skill
+        skillBtn2.SetSecondSkill(challenger);
+
+        Button secondSkill = skill2Btn.GetComponent<Button>();
+        secondSkill.onClick.AddListener(() => skillInfoView.DisplaySecondSkill(challenger));
+
+        SkillBtn usBtn = ultimateBtn.GetComponent<SkillBtn>(); //Ult
+        usBtn.SetUltSkill(challenger);
+
+        Button ultSkill = ultimateBtn.GetComponent<Button>();
+        ultSkill.onClick.AddListener(() => skillInfoView.DisplayUltimateSkill(challenger));
 
     }
 
